@@ -35,4 +35,7 @@ jobs:
             sudo systemctl restart tomcat9
 
       - name: Trigger Jenkins Job
-        run: sudo curl -l -u admin:11dde0e0002125cea8c4f0dafb1c912b8c http://54.234.188.38:8080/job/deploy/build?token=token1
+        run: |
+        CRUMB=$(curl -u admin:11dde0e0002125cea8c4f0dafb1c912b8c http://54.234.188.38:8080/crumbIssuer/api/json | jq -r '.crumb')
+        sudo curl -u admin:11dde0e0002125cea8c4f0dafb1c912b8c -H "Jenkins-Crumb:$CRUMB" -X POST http://54.234.188.38:8080/job/deploy/build?token=token1
+       
