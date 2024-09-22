@@ -31,5 +31,5 @@ jobs:
           last_ssh: |
              sudo systemctl restart tomcat9
       - name: Trigger KJenkins Job
-        run: sudo curl -l -u cbriggs:115b92b76607071bb946e0d5da1b941794 http://10.32.0.66:8080/job/ContinuosDeployment/build?token=token1
+        run: sudo curl -l -u admin:11dde0e0002125cea8c4f0dafb1c912b8c http://localhost:8080/job/deploy/build?token=token1
         
