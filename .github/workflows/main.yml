@@ -16,3 +16,20 @@ jobs:
           cache: 'maven'
       - name: Build the source code on ubuntu server 
         run: mvn package 
+        name: connect to LAB and deploy code on tomcat9
+        uses: cross-the-world/ssh-scp-ssh-pipelines@latest
+         with:
+          host: '54.234.188.38'
+          user: 'labuser'
+          pass: 'Nuvelabs123$'
+          port: 22
+          connect_timeout: 10s
+          first_ssh: |
+             sudo chmod 777 /var/lib/tomcat9/webapps
+          scp: |
+             './target/*war' => /var/lib/tomcat9/webapps
+          last_ssh: |
+             sudo systemctl restart tomcat9
+      - name: Trigger KJenkins Job
+        run: sudo curl -l -u cbriggs:115b92b76607071bb946e0d5da1b941794 http://10.32.0.66:8080/job/ContinuosDeployment/build?token=token1
+        
