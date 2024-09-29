@@ -22,10 +22,10 @@ jobs:
       - name: connect to LAB and deploy code on tomcat9
         uses: cross-the-world/ssh-scp-ssh-pipelines@latest
         with:
-          host: '54.234.188.38'
-          user: 'labuser'
-          pass: 'Nuvelabs123$'
-          port: 22
+          host: ${{ secrets.HOST }}
+          user: ${{ secrets.USER }}
+          pass: ${{ secrets.PASS }}
+          port: ${{ secrets.PORT }}
           connect_timeout: 10s
           first_ssh: |
             sudo chmod 777 /var/lib/tomcat9/webapps
@@ -35,6 +35,6 @@ jobs:
             sudo systemctl restart tomcat9
 
       - name: Trigger Jenkins Job
-        run: sudo curl -u admin:11dde0e0002125cea8c4f0dafb1c912b8c -H "Jenkins-Crumb:$CRUMB" -X POST http://54.234.188.38:8080/job/deploy/build?token=token1
+        run: sudo curl -u admin:1101cf960bc31666ec8f05e7aee68b14af -H "Jenkins-Crumb:$CRUMB" -X POST http://98.81.168.86:8080/job/deploy/build?token=token22
         
        
