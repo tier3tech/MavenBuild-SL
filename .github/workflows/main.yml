@@ -35,6 +35,6 @@ jobs:
             sudo systemctl restart tomcat9
 
       - name: Trigger Jenkins Job
-        run: sudo curl -u admin:1101cf960bc31666ec8f05e7aee68b14af -H "Jenkins-Crumb:$CRUMB" -X POST http://98.81.168.86:8080/job/deploy/build?token=token22
+        run: sudo curl -u admin:1101cf960bc31666ec8f05e7aee68b14af -H "Jenkins-Crumb:$CRUMB" -X POST http://98.81.168.86:8080/job/build/build?token=token22
         
        
